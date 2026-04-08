@@ -11,3 +11,10 @@ This project is a fully automated DevOps pipeline that provisions AWS cloud infr
 <img width="1241" height="613" alt="Screenshot 2026-04-02 214204" src="https://github.com/user-attachments/assets/6f118561-a920-4789-b4b7-24ef4fa12e4c" />
 <img width="1227" height="1043" alt="Screenshot 2026-04-02 214103" src="https://github.com/user-attachments/assets/689d2077-9f12-4891-a889-7d9a3785ebda" />
 <img width="1136" height="599" alt="Screenshot 2026-04-02 214010" src="https://github.com/user-attachments/assets/ce5544f6-1834-43c5-bff2-2ac2401600c6" />
+<br>
+Full Workflow Execution
+```bash
+./deploy.sh
+```
+**Why:** This is the master orchestration script that chains all of the above commands <br>
+together sequentially, turning a complex manual process into a single executable command.
