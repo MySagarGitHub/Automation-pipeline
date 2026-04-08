@@ -3,49 +3,11 @@
 ## 🚀 Project Overview
 This project is a fully automated DevOps pipeline that provisions AWS cloud infrastructure using Terraform, dynamically generates an inventory, and configures those instances as web servers using Ansible. Everything is orchestrated using a single Bash script for a "zero-click" deployment.
 
-## 💻 Commands Used & Why
 
-The core logic of this project relies on executing specific infrastructure commands in a sequence. Below is a summary of the exact commands used in this pipeline and the purpose behind each one:
-
-### 1. Terraform Initialization
-```bash
-terraform init
-```
-**Why:** Downloads AWS provider plugins and initializes the working directory containing the Terraform configuration files so that Terraform can establish a connection with the cloud provider.
-
-### 2. Infrastructure Provisioning
-```bash
-terraform apply -auto-approve
-```
-**Why:** Executes the deployment, building the declared AWS resources (EC2 instances, Security Groups, Key Pairs). The `-auto-approve` flag skips the manual "yes" prompt, allowing it to run fully automated in our shell script.
-
-### 3. State Extraction
-```bash
-terraform output -json instance_public_ips > output.json
-```
-**Why:** Cloud IP addresses are dynamically assigned. This command extracts the public IPs of our newly created EC2 instances from the Terraform state and saves them locally as a formatted JSON file.
-
-### 4. Dynamic Inventory Generation
-```bash
-python3 scripts/generate_inv.py
-```
-**Why:** Ansible requires an inventory file to know which servers to connect to. This custom Python script reads the freshly generated `output.json` and automatically formats it into an `.ini` inventory file that Ansible can understand, effectively bridging Terraform and Ansible.
-
-### 5. Deployment Pause
-```bash
-sleep 15
-```
-**Why:** EC2 instances take a few moments to fully boot up and start their SSH daemon. This command pauses the script to ensure the servers are actually ready to accept Ansible's incoming SSH connections.
-
-### 6. Configuration Management
-```bash
-ansible-playbook playbook.yml
-```
-**Why:** Executes the Ansible playbook against the dynamically generated target inventory. This logs into every server and applies the `webserver` role, configuring them uniformly without any manual setup.
-
-### 7. Full Workflow Execution
-```bash
-./deploy.sh
-```
-**Why:** This is the master orchestration script that chains all of the above commands together sequentially, turning a complex manual process into a single executable command.
-
+<img width="4583" height="1842" alt="diagram-export-4-2-2026-10_41_27-PM" src="https://github.com/user-attachments/assets/7bb953bc-9655-4035-87cd-14e99a0df14e" />
+<img width="2025" height="665" alt="Screenshot 2026-04-02 215123" src="https://github.com/user-attachments/assets/50cce84e-1061-4b6f-9861-2b73e5a6196b" />
+<img width="1269" height="881" alt="Screenshot 2026-04-02 214319" src="https://github.com/user-attachments/assets/89f585b3-4262-48cc-9f56-edcb769b6e55" />
+<img width="1238" height="874" alt="Screenshot 2026-04-02 214241" src="https://github.com/user-attachments/assets/7ea01957-7d2d-4a5a-9a95-c6cdf88d280a" />
+<img width="1241" height="613" alt="Screenshot 2026-04-02 214204" src="https://github.com/user-attachments/assets/6f118561-a920-4789-b4b7-24ef4fa12e4c" />
+<img width="1227" height="1043" alt="Screenshot 2026-04-02 214103" src="https://github.com/user-attachments/assets/689d2077-9f12-4891-a889-7d9a3785ebda" />
+<img width="1136" height="599" alt="Screenshot 2026-04-02 214010" src="https://github.com/user-attachments/assets/ce5544f6-1834-43c5-bff2-2ac2401600c6" />
